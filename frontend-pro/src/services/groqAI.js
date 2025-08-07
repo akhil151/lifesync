@@ -441,7 +441,98 @@ Feel free to ask follow-up questions or request help with specific digital legac
   }
 
   /**
-   * Make API call to Groq Cloud (with fallback to mock responses)
+   * Conversational AI responses - Natural like ChatGPT
+   */
+  getConversationalResponse(message) {
+    const lowerMessage = message.toLowerCase();
+
+    // Greetings and general conversation
+    if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey') || lowerMessage.includes('good morning') || lowerMessage.includes('good afternoon')) {
+      return `Hey there! 👋 Welcome to LifeSync! I'm your AI assistant here to help you with anything related to digital legacy planning.
+
+I can chat about the platform features, help you understand how to organize your digital assets, or just answer any questions you have about managing your digital inheritance. What's on your mind today?`;
+    }
+
+    // About the platform
+    if (lowerMessage.includes('what is this') || lowerMessage.includes('what is lifesync') || lowerMessage.includes('tell me about') || lowerMessage.includes('explain this platform')) {
+      return `LifeSync is a comprehensive digital legacy platform that helps you organize and secure your digital life for your loved ones. Think of it as your digital estate planning assistant!
+
+Here's what you can do with LifeSync:
+- Store and manage all your important accounts securely
+- Organize documents with military-grade encryption
+- Set up access for your heirs and beneficiaries
+- Track loans and financial obligations
+- Get AI-powered advice (that's me!) for planning
+- Handle emergency situations with our emergency portal
+
+It's like having a digital safety deposit box combined with a smart estate planning advisor. Pretty cool, right? What aspect interests you most?`;
+    }
+
+    // Loan/debt questions
+    if (lowerMessage.includes('loan') || lowerMessage.includes('debt') || lowerMessage.includes('borrow') || lowerMessage.includes('mortgage')) {
+      return `Ah, asking about loans and debts - that's actually a really important part of digital legacy planning that people often forget about!
+
+With LifeSync, you can track all your loans and debts so your family knows exactly what's what if something happens to you. We help you document everything from mortgages to credit cards to personal loans.
+
+The tricky thing about debts is that they don't just disappear when someone passes away - they become the estate's responsibility. So having everything organized and accessible to your heirs is super important.
+
+Are you looking to add some loan information to your profile, or do you have questions about how debts work in estate planning?`;
+    }
+
+    // Security questions
+    if (lowerMessage.includes('secure') || lowerMessage.includes('safe') || lowerMessage.includes('encrypt') || lowerMessage.includes('protect')) {
+      return `Security is absolutely our top priority at LifeSync! We use zero-knowledge encryption, which means even we can't see your data - only you and the people you choose to share it with.
+
+Think of it like this: your data is locked in a vault, and only you have the key. We don't have a master key or backdoor. Everything is encrypted before it even leaves your device.
+
+We also support biometric authentication, two-factor authentication, and all the good security practices you'd expect from a platform handling such sensitive information.
+
+What specific security concerns do you have? I'm happy to explain how we handle different types of data protection.`;
+    }
+
+    // Account/data questions
+    if (lowerMessage.includes('account') || lowerMessage.includes('data') || lowerMessage.includes('information') || lowerMessage.includes('store')) {
+      return `Great question about accounts and data! LifeSync is designed to be your central hub for all your digital life information.
+
+You can store things like:
+- Login credentials for important accounts (encrypted, of course)
+- Financial account information
+- Important documents and files
+- Contact information for heirs and beneficiaries
+- Instructions for accessing different services
+- Even personal messages for your loved ones
+
+Everything is organized in a way that makes sense, and you control exactly who can access what and when. It's like creating a digital roadmap for your family.
+
+What kind of accounts or information are you thinking about adding to your profile?`;
+    }
+
+    // AI/chatbot questions
+    if (lowerMessage.includes('ai') || lowerMessage.includes('chatbot') || lowerMessage.includes('assistant') || lowerMessage.includes('you')) {
+      return `That's me! 🤖 I'm the AI assistant built into LifeSync to help make digital legacy planning less overwhelming and more conversational.
+
+I'm powered by advanced AI technology (specifically Llama3-8b-8192 through Groq Cloud) and I'm designed to understand both the technical and emotional aspects of planning for your digital afterlife.
+
+I can help you:
+- Understand the platform features
+- Make decisions about what to include in your digital legacy
+- Answer questions about estate planning
+- Provide security recommendations
+- Just chat about whatever's on your mind related to digital inheritance
+
+I try to be more like talking to a knowledgeable friend rather than reading a manual. What would you like to know more about?`;
+    }
+
+    // General questions or anything else
+    return `That's an interesting question! I'm here to help you with anything related to LifeSync and digital legacy planning.
+
+Whether you're curious about how the platform works, need advice on organizing your digital assets, want to understand security features, or just want to chat about estate planning in general, I'm all ears!
+
+Could you tell me a bit more about what you're looking for? I'd love to give you a more specific and helpful response. What's the main thing you're trying to figure out or accomplish today?`;
+  }
+
+  /**
+   * Make API call to Groq Cloud (with fallback to conversational responses)
    */
   async makeAPICall(messages, systemPrompt = null) {
     // If in mock mode or development, use mock responses
@@ -452,7 +543,7 @@ Feel free to ask follow-up questions or request help with specific digital legac
       await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
 
       const userMessage = messages[messages.length - 1]?.content || '';
-      return this.getMockResponse(userMessage);
+      return this.getConversationalResponse(userMessage);
     }
 
     try {
@@ -531,18 +622,16 @@ Feel free to ask follow-up questions or request help with specific digital legac
    * General AI Assistant Chat
    */
   async chatAssistant(userMessage, conversationHistory = []) {
-    const systemPrompt = `You are a helpful AI assistant for a Digital Legacy Platform. You help users manage their digital assets, plan their digital inheritance, and organize important documents securely. 
+    const systemPrompt = `You are a friendly, conversational AI assistant for the LifeSync Digital Legacy Platform. Chat naturally like ChatGPT, but you have specialized knowledge about digital inheritance and the platform's features.
 
-Key areas you assist with:
-- Digital asset management and organization
-- Estate planning and inheritance setup
-- Security and privacy recommendations
-- Document management and categorization
-- Heir access control and permissions
-- Legal guidance for digital legacy planning
-- Technology recommendations for secure storage
+You can discuss:
+- The LifeSync platform (account management, document storage, heir management, AI assistant, loan tracking, emergency portal)
+- Digital legacy planning and inheritance
+- Security and encryption features
+- User data and accounts stored in the platform
+- General conversation while staying helpful
 
-Always be helpful, professional, and security-conscious. Provide practical, actionable advice.`;
+Be conversational, friendly, and natural. Don't use excessive bullet points or formal formatting unless asked. Chat like a knowledgeable friend who understands both technology and estate planning. Answer questions about the platform's features and help users understand their digital legacy options.`;
 
     const messages = [
       ...conversationHistory,
