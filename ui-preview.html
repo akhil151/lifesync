@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Legacy Platform - UI Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0ea5e9 0%, #d946ef 100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            padding: 1rem 0;
+            color: white;
+        }
+        
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #0ea5e9;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat p {
+            opacity: 0.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: #f8fafc;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #0ea5e9;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 4rem 0;
+            background: #f1f5f9;
+            text-align: center;
+        }
+        
+        .cta-icon {
+            font-size: 3rem;
+            color: #0ea5e9;
+            margin-bottom: 1rem;
+        }
+        
+        .cta h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header gradient-bg">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <span class="material-icons" style="margin-right: 8px;">shield</span>
+                    Digital Legacy Platform
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline">Login</button>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero gradient-bg">
+        <div class="container">
+            <div style="background: rgba(255,255,255,0.1); padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; margin-bottom: 2rem;">
+                🚀 Hackathon Demo Ready
+            </div>
+            <h1>Secure Your Digital Legacy</h1>
+            <p>Ultra-secure inheritance management with AI assistance. Protect your digital accounts, documents, and loans with military-grade encryption and biometric authentication.</p>
+            
+            <div class="stats">
+                <div class="stat">
+                    <h3>10,000+</h3>
+                    <p>Secure Accounts</p>
+                </div>
+                <div class="stat">
+                    <h3>99.9%</h3>
+                    <p>Uptime</p>
+                </div>
+                <div class="stat">
+                    <h3>256-bit</h3>
+                    <p>Encryption</p>
+                </div>
+                <div class="stat">
+                    <h3>24/7</h3>
+                    <p>AI Support</p>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-large">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">auto_awesome</span>
+                    Start Your Legacy
+                </button>
+                <button class="btn btn-outline btn-large">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">shield</span>
+                    Emergency Access
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comprehensive Digital Legacy Management</h2>
+                <p>Everything you need to secure and manage your digital inheritance with cutting-edge technology</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <span class="material-icons" style="font-size: inherit;">security</span>
+                    </div>
+                    <h3>Ultra-Secure Inheritance</h3>
+                    <p>Military-grade encryption with biometric authentication ensures your digital legacy is protected with zero-knowledge architecture.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #22c55e;">
+                        <span class="material-icons" style="font-size: inherit;">cloud_upload</span>
+                    </div>
+                    <h3>Document Management</h3>
+                    <p>Store and organize important documents with heir-specific access controls and end-to-end encryption.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #f59e0b;">
+                        <span class="material-icons" style="font-size: inherit;">account_balance</span>
+                    </div>
+                    <h3>Account & Loan Tracking</h3>
+                    <p>Manage digital accounts and track loans with automated inheritance workflows and real-time monitoring.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #ef4444;">
+                        <span class="material-icons" style="font-size: inherit;">people</span>
+                    </div>
+                    <h3>Heir Management</h3>
+                    <p>Set up heirs with biometric access and customized inheritance permissions for secure legacy transfer.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #d946ef;">
+                        <span class="material-icons" style="font-size: inherit;">smart_toy</span>
+                    </div>
+                    <h3>AI Assistant</h3>
+                    <p>Context-aware AI guide helps you navigate the platform and make informed decisions about your digital legacy.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon" style="color: #8b5cf6;">
+                        <span class="material-icons" style="font-size: inherit;">fingerprint</span>
+                    </div>
+                    <h3>Biometric Security</h3>
+                    <p>Advanced biometric authentication ensures only authorized access to sensitive information with device-native security.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-icon">
+                <span class="material-icons" style="font-size: inherit;">verified</span>
+            </div>
+            <h2>Ready to Secure Your Digital Future?</h2>
+            <p>Join thousands who trust us with their digital legacy. Start your secure inheritance plan today with our AI-powered platform.</p>
+            <button class="btn btn-large gradient-bg" style="color: white; border: none;">
+                <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">auto_awesome</span>
+                Get Started Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Digital Legacy Platform. All rights reserved. | Built for Hackathon Demo | Powered by AI & Advanced Security</p>
+        </div>
+    </footer>
+</body>
+</html>
